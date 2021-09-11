@@ -1,4 +1,4 @@
-# Gym-Tracker
+# Workout-Tracker
 
 REPO:
-https://github.com/ospa1/Gym-Tracker
+https://github.com/ospa1/Workout-Tracker
