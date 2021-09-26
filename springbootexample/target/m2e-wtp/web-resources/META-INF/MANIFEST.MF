@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 16
+Implementation-Title: springbootexample
+Implementation-Version: 0.0.1-SNAPSHOT
+Main-Class: perscholas.SpringBootExampleApplication
+Created-By: Maven Integration for Eclipse
+
