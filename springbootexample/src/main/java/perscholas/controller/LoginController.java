@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -25,6 +26,9 @@ public class LoginController {
 	@Autowired
 	private UserDAO userDao;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView result = new ModelAndView("/login");
@@ -38,19 +42,16 @@ public class LoginController {
 		ModelAndView result = new ModelAndView("/login");
 		result.addObject("form", form);
 
-		List<String> errors = new ArrayList<>();
-		for (FieldError error : bindingResult.getFieldErrors()) {
-			errors.add(error.getDefaultMessage());
-		}
-		result.addObject("errors", errors);
+		// gets the errors from annotations in form class
+		result.addObject("errors", getErrors(bindingResult));
 
 		if (bindingResult.hasErrors()) {
 			result.addObject("message", "Wrong Credentials");
 		} else {
 			result.addObject("message", "success!");
 			session.setAttribute("email", form.getEmail());
-			session.setAttribute("password", form.getPassword());
 			User user = userDao.findByEmail(form.getEmail());
+			session.setAttribute("user", user);
 			result.addObject("user", user);
 			result.setViewName("redirect:/mainpage"); // goes to function with mapping /inbox
 		}
@@ -74,12 +75,7 @@ public class LoginController {
 		result.addObject("form", form);
 
 		// gets the errors from annotations in form class
-		List<String> errors = new ArrayList<>();
-		for (FieldError error : bindingResult.getFieldErrors()) {
-			errors.add(error.getDefaultMessage());
-			System.out.println(error);
-		}
-		result.addObject("errors", errors);
+		result.addObject("errors", getErrors(bindingResult));
 
 		// Business logic
 
@@ -87,32 +83,16 @@ public class LoginController {
 		if (!bindingResult.hasErrors()) {
 			result.addObject("message", "its good");
 			session.setAttribute("email", form.getEmail());
-			session.setAttribute("password", form.getPassword());
 			result = new ModelAndView("/mainpage");
 		} else {
 			result.addObject("message", "error in the page");
 		}
 
 		// how to save to db
-		// userDao.save(new User());
-		return result;
-	}
-
-	@RequestMapping(value = "/mainpage")
-	public ModelAndView mainpage(HttpSession session) {
-
-		ModelAndView result;
-
-		if (session.getAttribute("email") != null) {
-			result = new ModelAndView("/mainpage");
-			String email = (String) session.getAttribute("email");
-			result.addObject("email", email);
-			result.addObject("message", "success!");
-		} else {
-			result = new ModelAndView("/login");
-			result.addObject("message", "Need to login first");
-		}
-
+		User user = new User();
+		user.setEmail(form.getEmail());
+		user.setPassword(passwordEncoder.encode(form.getPassword()));
+		// userDao.save(user);
 		return result;
 	}
 
@@ -121,5 +101,15 @@ public class LoginController {
 		session.invalidate();
 		ModelAndView result = new ModelAndView("redirect:/login");
 		return result;
+	}
+
+	// returns a list of error messages
+	public List<String> getErrors(BindingResult bindingResult) {
+		List<String> errors = new ArrayList<>();
+		for (FieldError error : bindingResult.getFieldErrors()) {
+			errors.add(error.getDefaultMessage());
+			System.out.println(error);
+		}
+		return errors;
 	}
 }

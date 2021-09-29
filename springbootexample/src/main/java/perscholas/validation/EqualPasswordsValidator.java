@@ -13,9 +13,17 @@ public class EqualPasswordsValidator implements ConstraintValidator<EqualPasswor
 
 	@Override
 	public boolean isValid(CreateUserForm form, ConstraintValidatorContext context) {
-		if (form.getPassword().equals(form.getConfirmPassword())) {
-			System.out.println("shit is not equal");
+
+		boolean valid = form.getPassword().equals(form.getConfirmPassword());
+		if (valid) {
+			System.out.println("password is equal");
+		} else {
+			System.out.println("password is not equal");
+			context.disableDefaultConstraintViolation();
+			context.buildConstraintViolationWithTemplate("passwords not equal").addConstraintViolation();
+			;
+			// context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate()).addConstraintViolation();
 		}
-		return form.getPassword().equals(form.getConfirmPassword());
+		return valid;
 	}
 }

@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EqualPasswords {
 
-	String message();
+	String message() default "Passwords do not match";
 
 	Class<?>[] groups() default {};
 

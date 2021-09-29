@@ -9,7 +9,7 @@
 <h1>Main Page</h1>
 <div>
 	<c:if test="${not empty email}">
-		<span style='color: blue'>Hello, ${email}</span>
+		<span style='color: blue'>Signed in as, ${email}</span>
 	</c:if>
 </div>
 <div>

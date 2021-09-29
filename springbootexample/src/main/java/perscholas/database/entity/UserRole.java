@@ -24,4 +24,8 @@ public class UserRole {
 
 	@Column(name = "fk_user_id", nullable = false)
 	private Integer userId;
+
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "fk_user_id")
+//	private User user;
 }

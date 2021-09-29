@@ -12,6 +12,8 @@ public interface TutorialDAO extends JpaRepository<Tutorial, Long> {
 	Tutorial findById(@Param("id") Integer id);
 
 	// TODO decide on url uniqueness and name uniqueness
+	List<Tutorial> findByNameIgnoreCase(@Param("name") String name);
+
 	List<Tutorial> findByName(@Param("name") String name);
 
 	List<Tutorial> findByUrl(@Param("url") String url);
