@@ -36,7 +36,7 @@
 		    <div class="input-group md-form form-sm form-2 pl-0">
 		      <input class="form-control my-0 py-1 red-border" type="text" name="search" value="${search}">
 		      <div class="input-group-append">
-		       <button class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button></div>
+		       <button class="btn btn-primary btn-md my-0 ml-sm-2" type="submit">Search</button></div>
 		    </div>
 		</form>
 	</div>
@@ -83,21 +83,21 @@
 		.input-group.md-form.form-sm.form-2 input.amber-border {
 		  border: 1px solid #ffca28;
 		}
-		
+
 		 /* embeded youtube */
-		.embed-container { 
-			position: relative; 
-			padding-bottom: 56.25%; 
-			height: 0; 
-			overflow: hidden; 
-			max-width: 100%; 
-		} 
-		.embed-container iframe, .embed-container object, .embed-container embed { 
-			position: absolute; 
-			top: 0; 
+		.embed-container {
+			position: relative;
+			padding-bottom: 56.25%;
+			height: 0;
+			overflow: hidden;
+			max-width: 100%;
+		}
+		.embed-container iframe, .embed-container object, .embed-container embed {
+			position: absolute;
+			top: 0;
 			left: 0;
-			width: 100%; 
-			height: 100%; 
+			width: 100%;
+			height: 100%;
 		}
 	</style>
 </html>
