@@ -81,6 +81,9 @@ public class SlashController {
 
 		result.addObject("search", search);
 		result.addObject("videos", videos);
+		
+		Integer videosSize = videos.size();
+		logger.info("all video count: " + videosSize.toString());
 
 		return result;
 	}
