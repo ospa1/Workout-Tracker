@@ -11,8 +11,6 @@ public interface UserDAO extends JpaRepository<User, Long> {
 
 	User findById(@Param("id") Integer id);
 
-	User findByUsername(@Param("username") String username);
-
 	// need to map user roles to user entity
 	// @Query("select ur from UserRole ur where ur.fk_user_id = :userId")
 	// List<UserRole> getUserRoles(Integer userId);

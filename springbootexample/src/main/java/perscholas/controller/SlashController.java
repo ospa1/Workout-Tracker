@@ -15,14 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import perscholas.database.dao.TutorialDAO;
-import perscholas.database.dao.UserDAO;
 import perscholas.database.entity.Tutorial;
 
 @Controller
 public class SlashController {
-
-	@Autowired
-	private UserDAO userDao;
 
 	@Autowired
 	private TutorialDAO tutorialDao;
