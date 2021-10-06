@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:if test="${not empty message}">
 	<span style='color: red'>${message}</span>
@@ -14,4 +15,19 @@
 </div>
 <div>
 	<a href="/logout">Logout</a>
+	<a href="/search">Tutorials</a>
+</div>
+<div>
+	<sec:authorize access="hasAnyAuthority('ADMIN')">
+	<br>
+	<span style="color: red;">ADMIN</span>
+	<a href="/admin/protected">Protected</a>
+	<br>
+	</sec:authorize>
+	
+	<sec:authorize access="!hasAnyAuthority('ADMIN')">
+	<br>
+	<span style="color: red;">USER</span>
+	<br>
+	</sec:authorize>
 </div>

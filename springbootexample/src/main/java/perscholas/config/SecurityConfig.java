@@ -1,5 +1,7 @@
 package perscholas.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,16 +31,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
+	
+	public final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
+		
+		LOG.debug("in configure");
 
-		http.csrf().disable().authorizeRequests().antMatchers("/pub/**", "/error/**", "/login/**", "/search")
-				.permitAll().antMatchers("/admin/**").authenticated().and().formLogin().loginPage("/login/login")
-				.loginProcessingUrl("/login/login").successHandler(successHandler).failureHandler(failureHandler).and()
-				.logout().invalidateHttpSession(true).logoutUrl("/login/logout").logoutSuccessUrl("/index").and()
-				.rememberMe().key("SR_KEY").tokenValiditySeconds(60 * 60 * 24 * 2).rememberMeParameter("remember-me")
-				.and().exceptionHandling().accessDeniedPage("/error/404");
+		http
+			.csrf().disable()
+			.authorizeRequests()
+				.antMatchers("/pub/**", "/error/**", "/login/**", "/search").permitAll()
+				.antMatchers("/admin/**", "/mainpage").authenticated()
+				.and()
+			.formLogin()
+				.loginPage("/login")
+				.loginProcessingUrl("/login")
+				.successHandler(successHandler)
+				.failureHandler(failureHandler)
+				.and()
+			.logout()
+				.invalidateHttpSession(true)
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/index")
+				.and()
+			.rememberMe()
+				.key("SR_KEY")
+				.tokenValiditySeconds(60 * 60 * 24 * 2)
+				.rememberMeParameter("remember-me")
+				.and()
+				.exceptionHandling()
+				.accessDeniedPage("/error/404");
 	}
 
 	@Bean

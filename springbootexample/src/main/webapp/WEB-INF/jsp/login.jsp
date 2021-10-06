@@ -17,12 +17,12 @@
 			<h1 id="loginHeader">LOGIN</h1>
 			<!-- Login Form -->
 			<form id="loginForm" action="/login" method="POST">
-				<input type="text" id="login" class="" name="email" value="${form.email}"
+				<input type="text" id="login" class="" name="username" value="${form.username}"
 					placeholder="email" /> 
 				<input type="password" id="password" value="${form.password}"
 					class="" name="password" placeholder="password" /> 
 				<input
-					type="submit" class="" value="Log In" onclick="loginValidation()" />
+					type="submit" class="" value="Log In" onclick="" />
 			</form>
 			<!-- sign up-->
 			<div id="formFooter">

@@ -31,7 +31,7 @@ public class LoginController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -43,6 +43,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView submit(@Valid LoginForm form, BindingResult bindingResult, HttpSession session) {
 
+		LOG.debug("in /login post");
 		ModelAndView result = new ModelAndView("/login");
 		result.addObject("form", form);
 
@@ -52,7 +53,7 @@ public class LoginController {
 			errors = getErrors(bindingResult);
 		}
 		
-		User user = userDao.findByEmail(form.getEmail());
+		User user = userDao.findByEmail(form.getUsername());
 	
 		// check for wrong email
 		if(user == null) {
@@ -64,7 +65,7 @@ public class LoginController {
 		}
 		// success
 		else {
-			session.setAttribute("email", form.getEmail());
+			session.setAttribute("email", form.getUsername());
 			session.setAttribute("user", user);
 			result.addObject("user", user);
 			result.setViewName("redirect:/mainpage"); // goes to function with mapping /mainpage
@@ -88,6 +89,8 @@ public class LoginController {
 	public ModelAndView createUser(@Valid CreateUserForm form, BindingResult bindingResult, HttpSession session) {
 		ModelAndView result = new ModelAndView("/Signup");
 
+		LOG.debug("in /creatuser post");
+		
 		// form validation
 		result.addObject("form", form);
 
@@ -125,7 +128,7 @@ public class LoginController {
 		for (FieldError error : bindingResult.getFieldErrors()) {
 			String msg = error.getDefaultMessage();
 			errors.add(msg);
-			logger.debug(msg);
+			LOG.debug(msg);
 		}
 		return errors;
 	}

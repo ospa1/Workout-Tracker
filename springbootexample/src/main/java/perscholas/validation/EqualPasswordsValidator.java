@@ -3,9 +3,14 @@ package perscholas.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import perscholas.form.CreateUserForm;
 
 public class EqualPasswordsValidator implements ConstraintValidator<EqualPasswords, CreateUserForm> {
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public void initialize(EqualPasswords constraint) {
@@ -16,9 +21,9 @@ public class EqualPasswordsValidator implements ConstraintValidator<EqualPasswor
 
 		boolean valid = form.getPassword().equals(form.getConfirmPassword());
 		if (valid) {
-			System.out.println("password is equal");
+			logger.info("password is equal");
 		} else {
-			System.out.println("password is not equal");
+			logger.info("password is not equal");
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("passwords not equal").addConstraintViolation();
 			;

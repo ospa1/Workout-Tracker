@@ -33,17 +33,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
+		LOG.debug("in username: " + username);
 		User user = userDao.findByEmail(username);
-
 		if (user == null) {
-			throw new UsernameNotFoundException("Username '" + username + "' not found in database");
+			throw new UsernameNotFoundException("Email '" + username + "' not found in database");
 		}
 
 		List<UserRole> userRoles = userRolesDao.findByUserId(user.getId());
 
 		// check the account status
 		boolean accountIsEnabled = true;
-		// accountIsEnabled = user.isActive();
 
 		// spring security configs
 		boolean accountNonExpired = true;
@@ -51,28 +50,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		boolean accountNonLocked = true;
 
 		// setup user roles
-		// List<Permission> permissions = userDao.getPermissionsByEmail(username);
-		// Collection<? extends GrantedAuthority> springRoles =
-		// buildGrantAuthorities(permissions);
 		Collection<? extends GrantedAuthority> springRoles = buildGrantAuthorities(userRoles);
 
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
 				accountIsEnabled, accountNonExpired, credentialsNonExpired, accountNonLocked, springRoles);
 	}
 
-//	private Collection<? extends GrantedAuthority> buildGrantAuthorities(List<Permission> permissions) {
-//		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-//		for (Permission permission : permissions) {
-//			authorities.add(new SimpleGrantedAuthority(permission.getName()));
-//		}
-//
-//		return authorities;
-//	}
 
 	private Collection<? extends GrantedAuthority> buildGrantAuthorities(List<UserRole> userRoles) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 		for (UserRole role : userRoles) {
+			LOG.info(role.getRole());
 			authorities.add(new SimpleGrantedAuthority(role.getRole().toString()));
 		}
 

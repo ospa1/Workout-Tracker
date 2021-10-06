@@ -37,7 +37,7 @@
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false">Links</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="login.html">Login</a>
+					<a class="dropdown-item" href="/login">Login</a>
 					<a class="dropdown-item" href="log.html">Example Log</a> 
 					<a class="dropdown-item" href="set.html">Example Set</a>
 				</div>

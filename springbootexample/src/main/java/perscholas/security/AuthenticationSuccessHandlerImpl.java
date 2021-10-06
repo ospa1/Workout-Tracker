@@ -18,6 +18,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 			Authentication authentication) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("successful login");
+		response.sendRedirect("/mainpage");
 	}
 
 }

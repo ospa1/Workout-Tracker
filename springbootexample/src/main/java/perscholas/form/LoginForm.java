@@ -11,7 +11,7 @@ public class LoginForm {
 
 	@NotEmpty(message = "Email cannot be empty")
 	@Email(message = "Email is invalid")
-	private String email;
+	private String username;
 
 	@NotEmpty(message = "Password cannot be empty")
 	@Size(min = 10, max = 25, message = "Password must be between 10 and 25 characters")

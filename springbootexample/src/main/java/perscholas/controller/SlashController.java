@@ -1,6 +1,8 @@
 package perscholas.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,21 +35,11 @@ public class SlashController {
 		return response;
 	}
 
-	@RequestMapping(value = "/mainpage")
-	public ModelAndView mainpage(HttpSession session) {
-
-		ModelAndView result;
-
-		if (session.getAttribute("email") != null) {
-			result = new ModelAndView("/mainpage");
-			String email = (String) session.getAttribute("email");
-			result.addObject("email", email);
-			result.addObject("message", "success!");
-		} else {
-			result = new ModelAndView("/login");
-			result.addObject("message", "Need to login first");
-		}
-
+	@RequestMapping(value = "/mainpage", method = RequestMethod.GET)
+	public ModelAndView mainpage(HttpSession session, Principal principal) {
+		ModelAndView result = new ModelAndView("/mainpage");
+		String email = principal.getName();
+		logger.debug("logged in as: " + email);
 		return result;
 	}
 
