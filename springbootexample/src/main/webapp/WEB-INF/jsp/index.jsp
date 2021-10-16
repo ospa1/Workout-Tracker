@@ -10,7 +10,6 @@
 </head>
 <body>
 	<h1>HELLO</h1>
-	<p>url parameter ${name}</p>
 	<a href="/login">login</a>
 </body>
 </html>

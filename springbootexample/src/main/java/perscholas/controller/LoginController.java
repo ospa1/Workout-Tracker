@@ -110,7 +110,7 @@ public class LoginController {
 			
 			session.setAttribute("email", form.getEmail());
 			session.setAttribute("user", user);
-			result = new ModelAndView("/mainpage");
+			result = new ModelAndView("/login");
 		}
 		return result;
 	}

@@ -29,8 +29,8 @@ public class Exercise {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	// @Column(name = "fk_user_id", nullable = false)
-	// private Integer userId;
+	//@Column(name = "fk_user_id", nullable = false)
+	//private Integer userId;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "fk_user_id", nullable = false)

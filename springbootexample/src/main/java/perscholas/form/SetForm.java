@@ -1,15 +1,18 @@
 package perscholas.form;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 import lombok.Data;
 
 @Data
 public class SetForm {
 
-	@NotEmpty(message = "weight cannot be empty")
+	@PositiveOrZero(message = "has to be posistive or zero")
+	@NotNull(message = "reps cannot be empty")
 	private Integer weight;
 
-	@NotEmpty(message = "reps cannot be empty")
+	@PositiveOrZero(message = "has to be posistive or zero")
+	@NotNull(message = "reps cannot be empty")
 	private Integer reps;
 }

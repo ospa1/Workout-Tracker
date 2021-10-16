@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
-@Table(name = "set")
+@Table(name = "`set`")
 @Data
 public class Set {
 

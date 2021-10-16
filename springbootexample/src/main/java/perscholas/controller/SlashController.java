@@ -2,7 +2,6 @@ package perscholas.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -62,7 +61,7 @@ public class SlashController {
 		return result;
 	}
 
-	@RequestMapping("/search/all")
+	@RequestMapping(value = "/search/all", method = RequestMethod.GET)
 	public ModelAndView searchAll(@RequestParam(required = false) String search) {
 		ModelAndView result = new ModelAndView("/search");
 

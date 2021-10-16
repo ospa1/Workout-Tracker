@@ -18,6 +18,4 @@ $(document).ready(function(){
 	$("#delete").click(function(){
 		$('.toast').toast('show');
 	});
-	
-	
 });

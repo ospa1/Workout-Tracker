@@ -16,6 +16,9 @@
 <div>
 	<a href="/logout">Logout</a>
 	<a href="/search">Tutorials</a>
+	<a href="/exercise">Exercises</a>
+	<a href="/history">History</a>
+	<a href="/stats">Stats</a>
 </div>
 <div>
 	<sec:authorize access="hasAnyAuthority('ADMIN')">
