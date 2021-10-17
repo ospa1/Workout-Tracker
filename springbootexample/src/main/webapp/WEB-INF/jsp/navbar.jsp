@@ -29,7 +29,7 @@
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" id="navbarBrand" href="#">Workout Tracker</a>
+	<a class="navbar-brand" id="navbarBrand" href="/mainpage">Workout Tracker</a>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
 			<li class="nav-item dropdown"><a

@@ -16,14 +16,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import perscholas.database.dao.SetDAO;
 import perscholas.database.dao.TutorialDAO;
+import perscholas.database.dao.UserDAO;
+import perscholas.database.entity.Set;
 import perscholas.database.entity.Tutorial;
+import perscholas.database.entity.User;
 
 @Controller
 public class SlashController {
 
 	@Autowired
 	private TutorialDAO tutorialDao;
+	
+	@Autowired
+	private SetDAO setDao;
+	
+	@Autowired
+	private UserDAO userDao;
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -75,4 +85,34 @@ public class SlashController {
 
 		return result;
 	}
+	
+	
+	@RequestMapping(value = "/history", method = RequestMethod.GET)
+	public ModelAndView history(Principal principal) {
+		ModelAndView result = new ModelAndView("/history");
+		logger.debug("history");
+		
+		String email = principal.getName();
+		User user = userDao.findByEmail(email);
+		List<Set> set = setDao.findByUserId(user.getId());
+		
+		result.addObject("sets", set);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/stats", method = RequestMethod.GET)
+	public ModelAndView stats(Principal principal) {
+		ModelAndView result = new ModelAndView("/stats");
+		logger.debug("stats");
+		
+		String email = principal.getName();
+		User user = userDao.findByEmail(email);
+		List<Set> set = setDao.findByUserId(user.getId());
+		
+		result.addObject("sets", set);
+		
+		return result;
+	}
 }
+
