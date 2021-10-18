@@ -15,5 +15,4 @@ public interface SetDAO extends JpaRepository<Set, Long> {
 
 	List<Set> findByUserId(@Param("fk_user_id") Integer userId);
 
-	// maybe get by date
 }

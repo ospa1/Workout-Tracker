@@ -8,48 +8,50 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>History</title>
+        <title>Stats</title>
     </head>
     <body>
         <div class="container" id="header">
-            <h1 style="font-family: 'Anton', sans-serif;">Workout History</h1>
+            <h1 style="font-family: 'Anton', sans-serif;">Workout Stats</h1>
             <hr />
         </div>
         
         <c:choose>
-		<c:when test="${empty sets}">
+		<c:when test="${empty exercises}">
 			<div class="container">
 				<span class="badge " style='color: black'>No Results Found</span>
 				<br>
 			</div>
 		</c:when>
-		<c:when test="${not empty sets}">
+		<c:when test="${not empty exercises}">
 			<div class="container" id="tableContainer">
 			<table class="table table-hover" id="exerciseTable">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Set ID</th>
+                        <th scope="col">Id</th>
                         <th scope="col">Exercise</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Reps</th>
-                        <th scope="col">Weight</th>
+                        <th scope="col">Volume</th>
+                        <th scope="col">Average</th>
                     </tr>
                 </thead>
+            <c:set var="count" value="0" scope="page" />
             <tbody>
-				<c:forEach items="${sets}" var="set">	
-		             <tr>
-		                 <th scope="row">${set.getId()}</th>
-		                 <td>${set.getExercise().getName()}</td>
-		                 <td>${set.getDate()}</td>
-		                 <td>${set.getReps()}</td>
-		                 <td>${set.getWeight()}</td>
-		             </tr>
+				<c:forEach items="${exercises}" var="exercise">	
+                    <tr>
+                        <th scope="row">${exercise.getId()}</th>
+                        <td>${exercise.getName()}</td>
+                        <td>${totals.get(Integer.parseInt(count))}</td>
+                        <td>${averages.get(Integer.parseInt(count))}</td>
+                    </tr>
+                	<c:set var="count" value="${count + 1}" scope="page"/>	
 				</c:forEach>
 			</tbody>
 			</table>
 		    </div>	
 		</c:when>
 		</c:choose>
+		
+		<h1>Total: ${total} Lbs Lifted</h1>
     </body>
      <style>
 		table, th, td {

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import perscholas.database.dao.SetDAO;
 import perscholas.database.dao.TutorialDAO;
 import perscholas.database.dao.UserDAO;
+import perscholas.database.entity.Exercise;
 import perscholas.database.entity.Set;
 import perscholas.database.entity.Tutorial;
 import perscholas.database.entity.User;
@@ -110,8 +111,59 @@ public class SlashController {
 		User user = userDao.findByEmail(email);
 		List<Set> set = setDao.findByUserId(user.getId());
 		
+		Integer total = totalFromSet(set);
+		result.addObject("total", total);
+		
+		List<Exercise> exercises = user.getExercises();
+		List<Integer> totals = new ArrayList<>();
+		List<String> averages = new ArrayList<>();
+		
+		for(Exercise e: exercises) {
+			totals.add(totalFromSet(e.getSets()));
+			averages.add(averageSet(e.getSets()));
+		}
+		result.addObject("totals", totals);
+		result.addObject("averages", averages);
+		
+		
+		List<Integer> days = new ArrayList<>();
+		
+		result.addObject("exercises", exercises);		
 		result.addObject("sets", set);
 		
+		return result;
+	}
+	
+	public Integer totalFromSet(List<Set> sets) {
+		Integer total = 0;
+		for(Set s: sets) {		
+			total += s.getReps() * s.getWeight();
+		}
+		return total;
+	}
+	
+	public String averageSet(List<Set> sets) {
+		
+		if(sets == null || sets.size() == 0) {
+			return "0";
+		}
+		
+		Double total = 0.0;
+		Integer count = 0;
+		Double average = 0.0;
+		
+		for(Set s: sets) {		
+			total += s.getReps() * s.getWeight();
+			count += s.getReps();
+		}
+		
+		try {
+			average = total / count;
+		}
+		catch(Exception e) {
+			logger.debug("division by zero in  average");
+		}
+		String result = String.format("%.1f",average);
 		return result;
 	}
 }
