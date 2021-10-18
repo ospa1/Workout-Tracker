@@ -15,4 +15,5 @@ public interface SetDAO extends JpaRepository<Set, Long> {
 
 	List<Set> findByUserId(@Param("fk_user_id") Integer userId);
 
+	List<Set> findByUserIdOrderByIdDesc(@Param("fk_user_id") Integer userId);
 }

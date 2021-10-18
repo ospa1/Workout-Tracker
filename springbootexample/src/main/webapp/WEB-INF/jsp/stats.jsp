@@ -14,7 +14,24 @@
         <div class="container" id="header">
             <h1 style="font-family: 'Anton', sans-serif;">Workout Stats</h1>
             <hr />
-        </div>
+        </div>      
+        
+        <div class="container">
+		<div class="card text-center bg-dark text-white">
+			<div class="card-body">
+			    <h1 class="card-title">Total Volume</h1>
+			    <h3 class="card-text">${total} Lbs</h3>
+		  	</div>
+		</div>
+		<br>
+		<div class="card text-center bg-dark text-white">
+			<div class="card-body">
+			    <h1 class="card-title">Days Lifted</h1>
+			    <h3 class="card-text">${days} Days</h3>
+		  	</div>
+		</div>
+		</div>
+		<br>        
         
         <c:choose>
 		<c:when test="${empty exercises}">
@@ -50,8 +67,6 @@
 		    </div>	
 		</c:when>
 		</c:choose>
-		
-		<h1>Total: ${total} Lbs Lifted</h1>
     </body>
      <style>
 		table, th, td {

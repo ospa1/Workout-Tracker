@@ -2,6 +2,9 @@ package perscholas.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import perscholas.database.dao.ExerciseDAO;
 import perscholas.database.dao.SetDAO;
 import perscholas.database.dao.TutorialDAO;
 import perscholas.database.dao.UserDAO;
@@ -35,6 +39,9 @@ public class SlashController {
 	
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private ExerciseDAO exerciseDao;
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -95,7 +102,7 @@ public class SlashController {
 		
 		String email = principal.getName();
 		User user = userDao.findByEmail(email);
-		List<Set> set = setDao.findByUserId(user.getId());
+		List<Set> set = setDao.findByUserIdOrderByIdDesc(user.getId());
 		
 		result.addObject("sets", set);
 		
@@ -109,12 +116,12 @@ public class SlashController {
 		
 		String email = principal.getName();
 		User user = userDao.findByEmail(email);
-		List<Set> set = setDao.findByUserId(user.getId());
+		List<Set> sets = setDao.findByUserId(user.getId());
 		
-		Integer total = totalFromSet(set);
+		Integer total = totalFromSet(sets);
 		result.addObject("total", total);
 		
-		List<Exercise> exercises = user.getExercises();
+		List<Exercise> exercises = exerciseDao.findByUserIdOrderByIdDesc(user.getId());
 		List<Integer> totals = new ArrayList<>();
 		List<String> averages = new ArrayList<>();
 		
@@ -124,14 +131,32 @@ public class SlashController {
 		}
 		result.addObject("totals", totals);
 		result.addObject("averages", averages);
-		
-		
-		List<Integer> days = new ArrayList<>();
+		result.addObject("days", countDistinctDays(sets));
 		
 		result.addObject("exercises", exercises);		
-		result.addObject("sets", set);
+		result.addObject("sets", sets);
 		
 		return result;
+	}
+	
+	public Integer countDistinctDays(List<Set> sets) {
+		HashSet<String> dates = new HashSet<>();
+		for(Set set: sets) {
+			Date date = set.getDate();
+			
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			
+			Integer year = calendar.get(Calendar.YEAR);
+			Integer month = calendar.get(Calendar.MONTH);
+			Integer day = calendar.get(Calendar.DAY_OF_MONTH);
+			
+			String sDate = year.toString() + month.toString() + day.toString();
+			
+			dates.add(sDate);
+		}
+		
+		return dates.size();
 	}
 	
 	public Integer totalFromSet(List<Set> sets) {
@@ -163,8 +188,8 @@ public class SlashController {
 		catch(Exception e) {
 			logger.debug("division by zero in  average");
 		}
-		String result = String.format("%.1f",average);
-		return result;
+		
+		return String.format("%.1f",average);
 	}
 }
 
