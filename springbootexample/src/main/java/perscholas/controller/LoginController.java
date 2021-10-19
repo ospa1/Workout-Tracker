@@ -30,7 +30,7 @@ public class LoginController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -52,15 +52,15 @@ public class LoginController {
 		if (bindingResult.hasErrors()) {
 			errors = getErrors(bindingResult);
 		}
-		
+
 		User user = userDao.findByEmail(form.getUsername());
-	
+
 		// check for wrong email
-		if(user == null) {
+		if (user == null) {
 			errors.add("Wrong Credentials");
 		}
 		// check for wrong password
-		else if(!passwordEncoder.matches(form.getPassword(), user.getPassword())) {
+		else if (!passwordEncoder.matches(form.getPassword(), user.getPassword())) {
 			errors.add("Wrong Credentials");
 		}
 		// success
@@ -70,9 +70,9 @@ public class LoginController {
 			result.addObject("user", user);
 			result.setViewName("redirect:/mainpage"); // goes to function with mapping /mainpage
 		}
-		
-		result.addObject("errors",errors);
-		
+
+		result.addObject("errors", errors);
+
 		return result;
 	}
 
@@ -90,7 +90,7 @@ public class LoginController {
 		ModelAndView result = new ModelAndView("/Signup");
 
 		LOG.debug("in /creatuser post");
-		
+
 		// form validation
 		result.addObject("form", form);
 
@@ -101,13 +101,13 @@ public class LoginController {
 		if (bindingResult.hasErrors()) {
 			result.addObject("message", "error in the page");
 		} else {
-			
+
 			// create new user and save to database
 			User user = new User();
 			user.setEmail(form.getEmail());
 			user.setPassword(passwordEncoder.encode(form.getPassword()));
 			userDao.save(user);
-			
+
 			session.setAttribute("email", form.getEmail());
 			session.setAttribute("user", user);
 			result = new ModelAndView("/login");
@@ -130,12 +130,15 @@ public class LoginController {
 			errors.add(msg);
 			LOG.debug(msg);
 		}
+		errors.forEach((error) -> {
+			System.out.println(error);
+		});
 		return errors;
 	}
-			
-			// 4 rest method types
-			// method = delete	for rest delete
-			// method = put - update
-			// method = get - read
-			// method = post - create
+
+	// 4 rest method types
+	// method = delete for rest delete
+	// method = put - update
+	// method = get - read
+	// method = post - create
 }

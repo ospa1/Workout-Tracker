@@ -9,7 +9,20 @@
 	<title>Exercises</title>
 </head>
 <body>
-	<h1>Exercises</h1>
+	<div class="container text-center">
+		<h1>Exercises</h1><br>
+		<button class="btn btn-primary" onclick="showForm()">+ New Exercise</button>
+		<div id="myDIV" style="display: none">
+			<br>
+		  	<form class="form-inline text-center" method="POST">
+				<div class="form-group mx-sm-3 mb-2">
+			    <input type="text" class="form-control" id="newExercise" name="name" placeholder="Exercise Name">
+			  	</div>
+			 	 <button type="submit" class="btn btn-primary mb-2">Submit</button>
+			 </form>
+		</div> 
+		<hr>
+	</div> 
 	<c:choose>
 	<c:when test="${empty exercises}">
 		<div class="container">
@@ -20,32 +33,26 @@
 	<c:when test="${not empty exercises}">
 		<c:forEach items="${exercises}" var="exercise">			
 			<div class="container">
-				<div class="card ">
+				<div class="card bg-light border-dark">
 					<div class="card-body">
 					    <h4 class="card-title">${exercise.getName()}</h4>
-					    <input type ="hidden" name="id" value="${id}">					   
-					    <a href="/getSets?exerciseId=${exercise.getId()}" class="stretched-link"></a>
+					    <input type ="hidden" name="id" value="${id}">
+					</div>
+					<div class="card-footer">
+						<form class="form-inline" method="POST">
+							<input type ="hidden" name="id" value="${id}">	
+							<a href="/getSets?exerciseId=${exercise.getId()}" class="card-link text-primary btn">View</a>
+							<button class="btn btn-primary" type="submit" formaction="/updateExercise/${exercise.getId()}">Rename</button>
+							<button class="btn btn-danger" type="submit" formaction="/deleteExercise/${exercise.getId()}">Delete</button>
+						</form>
+				
 					</div>
 				</div>
-				<form method="POST"><button class="btn btn-primary" type="submit" formaction="/updateExercise/${exercise.getId()}">rename</button></form>
-				<form method="POST"><button class="btn btn-primary" type="submit" formaction="/deleteExercise/${exercise.getId()}">delete</button></form>
 			</div>
+			<br>
 		</c:forEach>
 	</c:when>
 	</c:choose>
-	<div id="form"></div>
-	<button id="newExercise">New Exercise</button>
-	
-	 <button onclick="myFunction()">Click Me</button>
-
-	<div id="myDIV" style="display: none">
-	  	<form class="form-inline" method="POST">
-			<div class="form-group mx-sm-3 mb-2">
-		    <input type="text" class="form-control" id="newExercise" name="name" placeholder="Exercise Name">
-		  	</div>
-		 	 <button type="submit" class="btn btn-primary mb-2">Submit</button>
-		 </form>
-	</div> 
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -60,7 +67,7 @@
 		});
 	});
 	
-	function myFunction() {
+	function showForm() {
 		  var x = document.getElementById("myDIV");
 		  if (x.style.display === "none") {
 		    x.style.display = "block";

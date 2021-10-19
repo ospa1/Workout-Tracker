@@ -33,13 +33,13 @@ public class SlashController {
 
 	@Autowired
 	private TutorialDAO tutorialDao;
-	
+
 	@Autowired
 	private SetDAO setDao;
-	
+
 	@Autowired
 	private UserDAO userDao;
-	
+
 	@Autowired
 	private ExerciseDAO exerciseDao;
 
@@ -57,6 +57,7 @@ public class SlashController {
 		ModelAndView result = new ModelAndView("/mainpage");
 		String email = principal.getName();
 		logger.debug("logged in as: " + email);
+		result.addObject("email", email);
 		return result;
 	}
 
@@ -87,109 +88,106 @@ public class SlashController {
 
 		result.addObject("search", search);
 		result.addObject("videos", videos);
-		
+
 		Integer videosSize = videos.size();
 		logger.info("all video count: " + videosSize.toString());
 
 		return result;
 	}
-	
-	
+
 	@RequestMapping(value = "/history", method = RequestMethod.GET)
 	public ModelAndView history(Principal principal) {
 		ModelAndView result = new ModelAndView("/history");
 		logger.debug("history");
-		
+
 		String email = principal.getName();
 		User user = userDao.findByEmail(email);
 		List<Set> set = setDao.findByUserIdOrderByIdDesc(user.getId());
-		
+
 		result.addObject("sets", set);
-		
+
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/stats", method = RequestMethod.GET)
 	public ModelAndView stats(Principal principal) {
 		ModelAndView result = new ModelAndView("/stats");
 		logger.debug("stats");
-		
+
 		String email = principal.getName();
 		User user = userDao.findByEmail(email);
 		List<Set> sets = setDao.findByUserId(user.getId());
-		
+
 		Integer total = totalFromSet(sets);
 		result.addObject("total", total);
-		
+
 		List<Exercise> exercises = exerciseDao.findByUserIdOrderByIdDesc(user.getId());
 		List<Integer> totals = new ArrayList<>();
 		List<String> averages = new ArrayList<>();
-		
-		for(Exercise e: exercises) {
+
+		for (Exercise e : exercises) {
 			totals.add(totalFromSet(e.getSets()));
 			averages.add(averageSet(e.getSets()));
 		}
 		result.addObject("totals", totals);
 		result.addObject("averages", averages);
 		result.addObject("days", countDistinctDays(sets));
-		
-		result.addObject("exercises", exercises);		
+
+		result.addObject("exercises", exercises);
 		result.addObject("sets", sets);
-		
+
 		return result;
 	}
-	
+
 	public Integer countDistinctDays(List<Set> sets) {
 		HashSet<String> dates = new HashSet<>();
-		for(Set set: sets) {
+		for (Set set : sets) {
 			Date date = set.getDate();
-			
+
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
-			
+
 			Integer year = calendar.get(Calendar.YEAR);
 			Integer month = calendar.get(Calendar.MONTH);
 			Integer day = calendar.get(Calendar.DAY_OF_MONTH);
-			
+
 			String sDate = year.toString() + month.toString() + day.toString();
-			
+
 			dates.add(sDate);
 		}
-		
+
 		return dates.size();
 	}
-	
+
 	public Integer totalFromSet(List<Set> sets) {
 		Integer total = 0;
-		for(Set s: sets) {		
+		for (Set s : sets) {
 			total += s.getReps() * s.getWeight();
 		}
 		return total;
 	}
-	
+
 	public String averageSet(List<Set> sets) {
-		
-		if(sets == null || sets.size() == 0) {
+
+		if (sets == null || sets.size() == 0) {
 			return "0";
 		}
-		
+
 		Double total = 0.0;
 		Integer count = 0;
 		Double average = 0.0;
-		
-		for(Set s: sets) {		
+
+		for (Set s : sets) {
 			total += s.getReps() * s.getWeight();
 			count += s.getReps();
 		}
-		
+
 		try {
 			average = total / count;
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			logger.debug("division by zero in  average");
 		}
-		
-		return String.format("%.1f",average);
+
+		return String.format("%.1f", average);
 	}
 }
-
