@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
-	
+
 	public static final Logger LOG = LoggerFactory.getLogger(AuthenticationSuccessHandlerImpl.class);
 
 	@Override

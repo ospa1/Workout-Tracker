@@ -56,9 +56,8 @@ public class SetController {
 	}
 
 	@RequestMapping(value = "/createSet", method = RequestMethod.POST)
-	public ModelAndView createSetPost(@Valid SetForm form,
-			BindingResult bindingResult, HttpSession session) {
-		
+	public ModelAndView createSetPost(@Valid SetForm form, BindingResult bindingResult, HttpSession session) {
+
 		Integer exerciseId = (Integer) session.getAttribute("exerciseId");
 		logger.debug("in createSetPost ex_id:" + exerciseId);
 		ModelAndView mav = new ModelAndView("redirect:/getSets");
@@ -96,7 +95,7 @@ public class SetController {
 	}
 
 	@RequestMapping(value = "/updateSet", method = RequestMethod.GET)
-	public ModelAndView updateSet( @RequestParam Integer id) {
+	public ModelAndView updateSet(@RequestParam Integer id) {
 		logger.debug("in updateSet");
 		ModelAndView mav = new ModelAndView("/updateSet");
 		Set set = setDao.findById(id);
@@ -112,8 +111,8 @@ public class SetController {
 	}
 
 	@RequestMapping(value = "/updateSet", method = RequestMethod.POST)
-	public ModelAndView updateSetPost(@Valid SetForm form, @RequestParam Integer id,
-			BindingResult bindingResult, HttpSession session) {
+	public ModelAndView updateSetPost(@Valid SetForm form, @RequestParam Integer id, BindingResult bindingResult,
+			HttpSession session) {
 		logger.debug("in updateSetPost");
 		ModelAndView mav = new ModelAndView("redirect:/getSets");
 		mav.addObject("exerciseId", (Integer) session.getAttribute("exerciseId"));

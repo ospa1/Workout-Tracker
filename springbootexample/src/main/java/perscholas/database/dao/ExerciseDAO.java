@@ -15,9 +15,9 @@ public interface ExerciseDAO extends JpaRepository<Exercise, Long> {
 	Exercise findByName(@Param("name") String name);
 
 	List<Exercise> findByUserId(@Param("user_id") Integer user_id);
-	
+
 	List<Exercise> findByUserIdOrderByIdDesc(@Param("user_id") Integer user_id);
-	
+
 	@Query("select ex from Exercise as ex where ex.id = :id")
 	Exercise getExerciseById(@Param("id") Integer id);
 }

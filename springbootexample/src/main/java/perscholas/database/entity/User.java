@@ -30,7 +30,7 @@ public class User {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "password",nullable = false)
+	@Column(name = "password", nullable = false)
 	private String password;
 
 	// can set nullable to true and let the db do it

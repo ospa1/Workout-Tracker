@@ -5,24 +5,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="css/setStyle.css" />
-	<script type="text/javascript" src="scripts/setJS.js"></script>
-	<title>Modify Set</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/setStyle.css" />
+<script type="text/javascript" src="scripts/setJS.js"></script>
+<title>Modify Set</title>
 </head>
 <body>
 	<div class="container">
 		<h1>Modify Set</h1>
-           <p>Enter your new set information here</p>
+		<p>Enter your new set information here</p>
 		<hr />
 	</div>
-	<div class="container">Current Weigth: ${set.getWeight()} Current Reps: ${set.getReps()}</div>
+	<div class="container">Current Weigth: ${set.getWeight()} Current
+		Reps: ${set.getReps()}</div>
 	<div class="container d-flex" id="set">
-		<form class="form-inline" id="form" method="POST" style="margin-top: 40px">
-			<input type ="hidden" name="exerciseId" value="${exerciseId}">
-			<input type="number" class="form-control mb-2 mr-sm-2" id="weight" name="weight" placeholder="Weight">
-			<input type="number" class="form-control mb-2 mr-sm-2" id="reps" name="reps" placeholder="Reps">
-			<button type="submit" class="btn btn-primary mb-2" onclick="" id="button">Save</button>
+		<form class="form-inline" id="form" method="POST"
+			style="margin-top: 40px">
+			<input type="hidden" name="exerciseId" value="${exerciseId}">
+			<input type="number" class="form-control mb-2 mr-sm-2" id="weight"
+				name="weight" placeholder="Weight"> <input type="number"
+				class="form-control mb-2 mr-sm-2" id="reps" name="reps"
+				placeholder="Reps">
+			<button type="submit" class="btn btn-primary mb-2" onclick=""
+				id="button">Save</button>
 		</form>
 	</div>
 </body>

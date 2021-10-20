@@ -17,13 +17,12 @@
 			<!-- Login Form -->
 			<form id="loginForm" action="/createUser" method="POST">
 				<input type="text" id="login" class="" name="email"
-					placeholder="email" value="${form.email}" />
-				 <input type="password" id="password"
-					class="" name="password" placeholder="password" value="${form.password}" /> 
-				<input type="password" id="password"
-					class="" name="confirmPassword" placeholder="confirm password" value="${form.confirmPassword}" />
-				<input
-					type="submit" class="" value="Confirm" onclick="" />
+					placeholder="email" value="${form.email}" /> <input
+					type="password" id="password" class="" name="password"
+					placeholder="password" value="${form.password}" /> <input
+					type="password" id="password" class="" name="confirmPassword"
+					placeholder="confirm password" value="${form.confirmPassword}" />
+				<input type="submit" class="" value="Confirm" onclick="" />
 			</form>
 			<!-- sign up-->
 			<div id="formFooter">

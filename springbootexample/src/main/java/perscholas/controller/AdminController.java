@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 //@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping("/protected")

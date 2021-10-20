@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import perscholas.form.CreateUserForm;
 
 public class EqualPasswordsValidator implements ConstraintValidator<EqualPasswords, CreateUserForm> {
-	
+
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override

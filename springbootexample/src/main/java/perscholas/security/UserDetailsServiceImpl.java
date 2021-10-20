@@ -56,7 +56,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				accountIsEnabled, accountNonExpired, credentialsNonExpired, accountNonLocked, springRoles);
 	}
 
-
 	private Collection<? extends GrantedAuthority> buildGrantAuthorities(List<UserRole> userRoles) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 

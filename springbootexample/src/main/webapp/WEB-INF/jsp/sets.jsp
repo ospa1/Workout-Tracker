@@ -12,8 +12,8 @@
 	<h1 class="text-center">Sets</h1>
 	<div class="container">
 		<form class="form-inline text-center" method="GET">
-			<button type="submit" class="btn btn-primary"
-				formaction="/createSet">+ Add New Set</button>
+			<button type="submit" class="btn btn-primary" formaction="/createSet">+
+				Add New Set</button>
 		</form>
 	</div>
 	<c:choose>

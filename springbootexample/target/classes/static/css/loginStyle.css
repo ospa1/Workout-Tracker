@@ -1,97 +1,96 @@
-
 body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
-  background-image: url("../images/bg1.jpg");
+	font-family: "Poppins", sans-serif;
+	height: 100vh;
+	background-image: url("../images/bg1.jpg");
 }
 
 a {
-  display:inline-block;
-  text-decoration: none;
-  font-weight: 400;
+	display: inline-block;
+	text-decoration: none;
+	font-weight: 400;
 }
 
-a:hover{
+a:hover {
 	color: #92badd;
 }
 
 .wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column; 
-  justify-content: center;
-  width: 100%;
-  min-height: 100%;
-  padding: 20px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	min-height: 100%;
+	padding: 20px;
 }
 
 #formContent {
-  border-radius: 10px 10px 10px 10px;
-  background: #fff;
-  padding: 30px;
-  width: 90%;
-  max-width: 450px;
-  position: relative;
-  padding: 0px;
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  text-align: center;
+	border-radius: 10px 10px 10px 10px;
+	background: #fff;
+	padding: 30px;
+	width: 90%;
+	max-width: 450px;
+	position: relative;
+	padding: 0px;
+	box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+	text-align: center;
 }
 
 #formFooter {
-  background-color: #f6f6f6;
-  border-top: 1px solid #dce8f1;
-  padding: 25px;
-  text-align: center;
-  border-radius: 0 0 10px 10px;
+	background-color: #f6f6f6;
+	border-top: 1px solid #dce8f1;
+	padding: 25px;
+	text-align: center;
+	border-radius: 0 0 10px 10px;
 }
 
-input[type=button], input[type=submit]  {
-  background-color: #56baed;
-  border: none;
-  color: white;
-  padding: 15px 80px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 13px;
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 20px 20px;
+input[type=button], input[type=submit] {
+	background-color: #56baed;
+	border: none;
+	color: white;
+	padding: 15px 80px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 13px;
+	box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+	border-radius: 5px 5px 5px 5px;
+	margin: 5px 20px 20px 20px;
 }
 
-input[type=button]:hover, input[type=submit]:hover  {
-  background-color: #39ace7;
+input[type=button]:hover, input[type=submit]:hover {
+	background-color: #39ace7;
 }
 
 input[type=text], input[type=password] {
-  background-color: #e3e3e3;
-  border: none;
-  color: #0d0d0d;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 6px;
-  width: 75%;
-  border: 2px solid #56baed;
-  border-radius: 5px 5px 5px 5px;
+	background-color: #e3e3e3;
+	border: none;
+	color: #0d0d0d;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 6px;
+	width: 75%;
+	border: 2px solid #56baed;
+	border-radius: 5px 5px 5px 5px;
 }
 
 input[type=text]:focus, input[type=password]:focus {
-  background-color: #ffffff;
-  border-bottom: 2px solid #5fbae9;
+	background-color: #ffffff;
+	border-bottom: 2px solid #5fbae9;
 }
 
 input[type=text]:placeholder {
-  color: #cccccc;
+	color: #cccccc;
 }
 
 *:focus {
-    outline: none;
-} 
+	outline: none;
+}
 
-#login, #password, #loginHeader{
+#login, #password, #loginHeader {
 	font-family: 'Oleo Script', cursive;
 	margin: 25px;
 }

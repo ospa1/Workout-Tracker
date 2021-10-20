@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHandler {
 
 	public static final Logger LOG = LoggerFactory.getLogger(AuthenticationFailureHandlerImpl.class);
-	
+
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
