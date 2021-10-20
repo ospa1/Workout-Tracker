@@ -14,7 +14,12 @@ https://github.com/ospa1/Workout-Tracker
 
 ## Technologies
 - Spring Security for authentication
-- password encryption using Bcrypt
+- Password encryption using Bcrypt
+- Built using maven
+- Front end is displayed with jsp pages using html and jstl.
+- stylized using css and bootstrap
+- backend developed using java and spring boot framework
+- spring data make models and query database
 
 ## Pros
 - Can use app on a mobile device
