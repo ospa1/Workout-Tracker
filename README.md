@@ -17,7 +17,7 @@ https://github.com/ospa1/Workout-Tracker
 - password encryption using Bcrypt
 
 ## Pros
-- 
+- Can use app on a mobile device
 
 ## Cons
 - Set times are in UTC
