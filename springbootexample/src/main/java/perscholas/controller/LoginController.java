@@ -125,13 +125,10 @@ public class LoginController {
 	// returns a list of error messages
 	public List<String> getErrors(BindingResult bindingResult) {
 		List<String> errors = new ArrayList<>();
-		for (FieldError error : bindingResult.getFieldErrors()) {
+		bindingResult.getFieldErrors().forEach((error) -> {
 			String msg = error.getDefaultMessage();
 			errors.add(msg);
 			LOG.debug(msg);
-		}
-		errors.forEach((error) -> {
-			System.out.println(error);
 		});
 		return errors;
 	}
