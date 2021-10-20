@@ -63,24 +63,6 @@
 	</c:choose>
 </body>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$("#newExercise")
-								.click(
-										function() {
-											$('#form')
-													.append(
-															'\
-					<form class="form-inline" method="POST">\
-					<div class="form-group mx-sm-3 mb-2">\
-				    <input type="text" class="form-control" id="newExercise" name="name" placeholder="Exercise Name">\
-				  </div>\
-				  <button type="submit" class="btn btn-primary mb-2">Submit</button>\
-				  </div>');
-										});
-					});
-
 	function showForm() {
 		var x = document.getElementById("myDIV");
 		if (x.style.display === "none") {
