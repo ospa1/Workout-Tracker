@@ -7,8 +7,12 @@ https://github.com/ospa1/Workout-Tracker
 
 
 ## Features
+- 
 
 ## Technologies
+- Spring Security for authentication
+- password encryption using Bcrypt
+
 
 ## Pros
 
