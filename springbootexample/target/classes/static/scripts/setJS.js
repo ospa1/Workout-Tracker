@@ -1,17 +1,9 @@
 
 function validate(){
 	
-	let weight = document.getElementById("weight").value;
-	let reps = document.getElementById("reps").value;
-	
-	if(Number.isInteger(parseInt(weight)) && Number.isInteger(parseInt(reps))){
-		alert("volume: " + weight * reps + " lbs");
-		return true;
-	}
-	else{
-		alert("the input field is incorrect");
-		return false;
-	}
+	let validWeight = validateField("weight");
+	let validReps = validateField("reps");
+	return validWeight && validReps;
 }
 
 $(document).ready(function(){
@@ -19,3 +11,16 @@ $(document).ready(function(){
 		$('.toast').toast('show');
 	});
 });
+
+function validateField(field){
+	
+	let value = document.getElementById(field).value;
+	
+	if(Number.isInteger(parseInt(value))){
+		return true;
+	}
+	else{
+		alert("the input field is incorrect");
+		return false;
+	}
+}

@@ -35,7 +35,7 @@
 		<c:when test="${not empty exercises}">
 			<c:forEach items="${exercises}" var="exercise">
 				<div class="container">
-					<div class="card bg-light border-dark">
+					<div class="card bg-dark border-light text-white">
 						<div class="card-body d-inline">
 							<div class="row">
 								<div class="col-xs-12 col-md-8 font-weight-bolder h4">${exercise.getName()}</div>
@@ -53,7 +53,6 @@
 								<button class="btn btn-danger" type="submit"
 									formaction="/deleteExercise/${exercise.getId()}">Delete</button>
 							</form>
-
 						</div>
 					</div>
 				</div>

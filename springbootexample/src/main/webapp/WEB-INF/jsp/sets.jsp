@@ -23,42 +23,85 @@
 			</div>
 		</c:when>
 		<c:when test="${not empty sets}">
-			<c:forEach items="${sets}" var="set">
-				<div class="container">
-					<div class="card bg-light border-dark">
-						<div class="card-body">
-							<div class="row">
-								<div class="col-xs-12 col-md-8 font-weight-bolder h4">Weight:
-									${set.getWeight()} Reps: ${set.getReps()}</div>
-								<div class="col-xs-6 col-md-4 text-right font-weight-bolder h4">${set.getDate()}</div>
-							</div>
+			<div class="container">
+			<c:set var="count" value="1" scope="page" />
+				<div class="table-responsive">
+				<table class="table table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Reps</th>
+							<th scope="col">Lbs</th>
+							<th scope="col">Date</th>
+							<th scope="col">Edit</th>
+							<th scope="col">Delete</th>
+						</tr>
+					</thead>
+					<c:forEach items="${sets}" var="set">
+					<tbody>
+						<tr>
+							<th scope="row">${count}</th>
+							<td>${set.getReps()}</td>
+							<td>${set.getWeight()}</td>
+							<td>${set.getDate()}</td>
+							<td>
+								<form method="GET">
+									<input type="hidden" name="id" value="${set.getId()}">
+									<input type="hidden" name="exerciseId" value="${exerciseId}">
+									<button class="btn btn-primary" type="submit"
+										formaction="/updateSet">Edit</button>
+								</form>
+							</td>
+							<td>
+								<form method="POST" action="/deleteSet">
+									<input type="hidden" name="id" value="${set.getId()}">
+									<input type="hidden" name="exerciseId" value="${exerciseId}">
+									<input type="hidden" name="_method" value="DELETE">
+									<button type="submit" class="btn btn-danger">Delete</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					</c:forEach>
+				</table>
+			</div>
+			</div>
+		</c:when>
+	</c:choose>
+</body>
+</html>
+
+<!-- <div class="row">
+						<div class="col-md-1">
+							<h3>${count}</h3>
 						</div>
-						<div class="card-footer">
+						<div class="col-md-3">
+							<h3>${set.getReps()} reps</h3>
+							<h3>${set.getWeight()} lbs</h3>
+						</div>
+						<div class="col-md-3">
+							<h3>${set.getDate()}</h3>
+						</div>
+						<div class="col-md-4">
 							<div class="row">
-								<div class="col-xs-12 col-md-8 font-weight-bolder h4">
+								<div class="col-md-4">
 									<form method="GET">
 										<input type="hidden" name="id" value="${set.getId()}">
 										<input type="hidden" name="exerciseId" value="${exerciseId}">
 										<button class="btn btn-primary" type="submit"
-											formaction="/updateSet">modify</button>
+											formaction="/updateSet">Modify</button>
 									</form>
 								</div>
-								<div class="col-xs-6 col-md-4 text-right font-weight-bolder h4">
-									<form method="POST">
+								<div class="col-md-4">
+									<form method="POST" action="/deleteSet">
 										<input type="hidden" name="id" value="${set.getId()}">
 										<input type="hidden" name="exerciseId" value="${exerciseId}">
-										<button class="btn btn-danger" type="submit"
-											formaction="/deleteSet">delete</button>
+										<input type="hidden" name="_method" value="DELETE">
+										<button type="submit" class="btn btn-danger">Delete</button>
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<br>
-				</div>
-			</c:forEach>
-		</c:when>
-	</c:choose>
-</body>
-</html>
+					<hr> -->

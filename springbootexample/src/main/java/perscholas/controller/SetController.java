@@ -130,4 +130,21 @@ public class SetController {
 
 		return mav;
 	}
+
+	@RequestMapping(value = "/sets/{id}/edit" , method = RequestMethod.GET)
+	public ModelAndView editSet(@RequestParam Integer id) {
+		logger.debug("in editSet");
+		ModelAndView mav = new ModelAndView("/editSet");
+		Set set = setDao.findById(id);
+
+		if (set == null) {
+			mav.setViewName("redirect:/getSets");
+			return mav;
+		}
+
+		mav.addObject("set", set);
+
+		return mav;
+
+	}
 }
