@@ -33,8 +33,8 @@
 			</div>
 		</c:when>
 		<c:when test="${not empty exercises}">
+			<div class="container">
 			<c:forEach items="${exercises}" var="exercise">
-				<div class="container">
 					<div class="card bg-dark border-light text-white">
 						<div class="card-body d-inline">
 							<div class="row">
@@ -55,9 +55,9 @@
 							</form>
 						</div>
 					</div>
-				</div>
 				<br>
 			</c:forEach>
+			</div>
 		</c:when>
 	</c:choose>
 </body>
