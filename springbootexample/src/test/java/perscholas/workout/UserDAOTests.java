@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
-import perscholas.database.dao.UserDAO;
-import perscholas.database.entity.User;
+import project.database.dao.UserDAO;
+import project.database.entity.User;
 
 @DataJpaTest
 @TestMethodOrder(OrderAnnotation.class)

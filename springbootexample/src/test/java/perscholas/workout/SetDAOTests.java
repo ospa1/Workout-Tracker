@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
-import perscholas.database.dao.ExerciseDAO;
-import perscholas.database.dao.SetDAO;
-import perscholas.database.dao.UserDAO;
-import perscholas.database.entity.Exercise;
-import perscholas.database.entity.Set;
-import perscholas.database.entity.User;
+import project.database.dao.ExerciseDAO;
+import project.database.dao.SetDAO;
+import project.database.dao.UserDAO;
+import project.database.entity.Exercise;
+import project.database.entity.Set;
+import project.database.entity.User;
 
 @DataJpaTest
 @TestMethodOrder(OrderAnnotation.class)
