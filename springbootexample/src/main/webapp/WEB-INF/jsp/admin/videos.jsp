@@ -16,7 +16,9 @@
 	<div class="container">
 		<div class="d-inline p-2">Videos List</div>
 		<div class="d-inline p-2">
-			<button class="btn btn-primary" type="submit" method="GET" formaction="/videos/new">Add Video</button>
+			<form method="GET" class="d-inline p-2" action="/admin/videos/new">
+				<button class="btn btn-primary" type="submit">Add Video</button>
+			</form>
 		</div>
 		<hr>
 		<table class="table table-striped">
@@ -39,13 +41,14 @@
 							<form method="GET">
 								<input type="hidden" name="id" value="${video.getId()}">
 								<button class="btn btn-success" type="submit"
-									formaction="/videos/edit">Edit</button>
+									formaction="/admin/videos/edit">Edit</button>
 							</form>
 						</td>
 						<td>
-							<form method="POST" action="/videos/delete">
-								<input type="hidden" name="video" value="${video}">
-								<input type="hidden" name="_method" value="DELETE">
+							<form method="POST" action="/admin/videos/delete">
+								<input type="hidden" name="id" value="${video.getId()}">
+								<input type="hidden" name="name" value="${video.getName()}">
+								<input type="hidden" name="url" value="${video.getUrl()}">
 								<button type="submit" class="btn btn-danger">Delete</button>
 							</form>
 						</td>

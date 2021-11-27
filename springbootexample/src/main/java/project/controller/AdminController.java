@@ -61,7 +61,7 @@ public class AdminController {
 	public ModelAndView newVideo(Tutorial video) {
 		LOG.debug("in /videos/new POST");
 		ModelAndView response = new ModelAndView();
-		response.setViewName("admin/newVideo");
+		response.setViewName("redirect:/admin/videos");
 		
 		//save video
 		tutorialDao.save(video);
@@ -88,7 +88,7 @@ public class AdminController {
 	public ModelAndView editVideo(Tutorial video) {
 		LOG.debug("in /videos/edit POST");
 		ModelAndView response = new ModelAndView();
-		response.setViewName("admin/editVideo");
+		response.setViewName("redirect:/admin/videos");
 		
 		//save video
 		tutorialDao.save(video);
@@ -97,26 +97,27 @@ public class AdminController {
 	}
 
 	//delete a video
-//	@RequestMapping(value="/videos/delete", method=RequestMethod.GET)
-//	public ModelAndView deleteVideo(int id) {
-//		LOG.debug("in /videos/delete");
-//		ModelAndView response = new ModelAndView();
-//		response.setViewName("admin/deleteVideo");
-//		
-//		//get video
-//		Tutorial video = tutorialDao.findById(id);
-//		response.addObject("video", video);
-//		
-//		return response;
-//	}
+	@RequestMapping(value="/videos/delete", method=RequestMethod.GET)
+	public ModelAndView deleteVideo(int id) {
+		LOG.debug("in /videos/delete");
+		ModelAndView response = new ModelAndView();
+		response.setViewName("admin/deleteVideo");
+		
+		//get video
+		Tutorial video = tutorialDao.findById(id);
+		response.addObject("video", video);
+		
+		return response;
+	}
 
 	//delete a video
 	@RequestMapping(value="/videos/delete", method=RequestMethod.POST)
 	public ModelAndView deleteVideo(Tutorial video) {
 		LOG.debug("in /videos/delete POST");
 		ModelAndView response = new ModelAndView();
-		response.setViewName("redirect:admin/videos");
+		response.setViewName("redirect:/admin/videos");
 		
+		System.out.println("deleting video: " + video);
 		//delete video
 		tutorialDao.delete(video);
 		
