@@ -63,6 +63,15 @@ public class AdminController {
 		ModelAndView response = new ModelAndView();
 		response.setViewName("redirect:/admin/videos");
 		
+		//TODO make it check valid form or abstract into a function
+		try {
+			video.setUrl(embedVideo(video));
+		}
+		catch(Exception e) {
+			LOG.debug(e.getMessage());
+		}
+
+		
 		//save video
 		tutorialDao.save(video);
 		
@@ -89,6 +98,14 @@ public class AdminController {
 		LOG.debug("in /videos/edit POST");
 		ModelAndView response = new ModelAndView();
 		response.setViewName("redirect:/admin/videos");
+		
+		//TODO add validation
+		try {
+			video.setUrl(embedVideo(video));
+		}
+		catch(Exception e) {
+			LOG.debug(e.getMessage());
+		}
 		
 		//save video
 		tutorialDao.save(video);
@@ -122,6 +139,19 @@ public class AdminController {
 		tutorialDao.delete(video);
 		
 		return response;
+	}
+	
+	private String embedVideo(Tutorial video) {
+		final String youtube = "https://www.youtube.com/embed/";
+		String url = video.getUrl();
+		
+		try {
+			url = youtube + url.split("=")[1];
+		}
+		catch(Exception e) {
+			LOG.debug(e.getMessage());
+		}
+		return url;
 	}
 
 }

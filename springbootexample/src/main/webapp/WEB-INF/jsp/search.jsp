@@ -43,7 +43,7 @@
 						<div class="card-body">
 							<h4 class="card-title">${video.getName()}</h4>
 							<div class='embed-container'>
-								<iframe src='https://www.youtube.com/embed/nhoikoUEI8U'></iframe>
+								<iframe src='${video.getUrl()}'></iframe>
 							</div>
 						</div>
 					</div>
