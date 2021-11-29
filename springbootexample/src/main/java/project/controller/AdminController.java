@@ -143,9 +143,10 @@ public class AdminController {
 	
 	private String embedVideo(Tutorial video) {
 		final String youtube = "https://www.youtube.com/embed/";
-		String url = video.getUrl();
+		String url = "";
 		
 		try {
+			url = video.getUrl();
 			url = youtube + url.split("=")[1];
 		}
 		catch(Exception e) {
